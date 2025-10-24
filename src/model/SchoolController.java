@@ -1,6 +1,15 @@
 package model;
 
+import model.Incident;
+import model.Computer;
+
 public class SchoolController {
+
+    private String name;
+    private int hourSpentSupport;
+    int FLOORS = 5;
+    int COL = 10;
+    int[][] matrizComputers = new int[FLOORS][COL];
 
     /*
      * ATENCION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -8,8 +17,31 @@ public class SchoolController {
      * requerimientos.
      */
 
-    public SchoolController() {
+    public SchoolController(String name, int hourSpentSupport ) {
+        this.name = name;
+        this.hourSpentSupport = hourSpentSupport;
+    }
 
+    
+
+    //Setters 
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHourSpentSupport(int hourSpentSupport) {
+        this.hourSpentSupport = hourSpentSupport;
+    }
+
+    //Getters
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHourSpentSupport() {
+        return hourSpentSupport;
     }
 
     /*
@@ -22,7 +54,7 @@ public class SchoolController {
      * Agregue la logica necesaria (instrucciones) para satisfacer los
      * requerimientos.
      */
-    public void agregarComputador() {
+    public String agregarComputador(String SerialNumber) {
 
     }
 
