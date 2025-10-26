@@ -1,6 +1,7 @@
 package ui;
 
 import java.util.Scanner;
+import model.SchoolController;
 
 public class SchoolApp {
 
@@ -76,15 +77,35 @@ public class SchoolApp {
      */
 
     public void registrarComputador() {
+        System.out.println("Ingrese el número serial: ");
+        String serialNumber = Scanner.nextLine();
 
+        System.out.println("¿Está junto a una ventana? (true/false): ");
+        boolean nextWindow = Scanner.nextBoolean();
+        Scanner.nextLine();
+
+        System.out.println(SchoolController.agregarComputador(serialNumber, nextWindow));
+
+        System.out.println("Todos los espacios han sido procesados.");
     }
 
     public void registrarIncidenteEnComputador() {
-
+        System.out.print("Ingrese el piso: ");
+        int FLOORS = Scanner.nextInt();
+        
+        System.out.print("Ingrese la columna: ");
+        int COL = Scanner.nextInt();
+        Scanner.nextLine(); 
+        
+        System.out.print("Descripción del incidente: ");
+        String description = Scanner.nextLine();
+        
+        SchoolController.addIncidentToComputer(FLOORS, COL, description);
     }
 
     public void consultarComputadorConMasIncidentes() {
-
+        System.out.println(SchoolController.getComputerList());
+        break;
     }
 
 }

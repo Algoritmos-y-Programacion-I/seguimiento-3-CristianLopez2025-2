@@ -1,5 +1,5 @@
 package model;
-import java.util.LocalDate;
+import java.time.LocalDate;
 
 
 public class Incident {
@@ -9,7 +9,11 @@ public class Incident {
     private boolean solution;
     private int solutionHours; 
 
-
+    /**
+     * Descripcion: Constructor del incident.
+     * @param dateReport Fecha del reporte del incidente.
+     * @param description Descripcion del incidente. 
+     */
     public Incident (LocalDate dateReport, String description) {
     this.dateReport = dateReport;
     this.description = description;
@@ -22,7 +26,7 @@ public class Incident {
     }
 
     public void setDescription(String description) {
-        this.decription = description;
+        this.description = description;
     }
 
     public void setSolution(boolean solution) {

@@ -1,20 +1,24 @@
 package model;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class Computer {
 
     private String serialNumber;
     private boolean nextWindow;
-    private computer[] computers;
-    /*
-     * ATENCION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     * Agregue los atributos (relaciones) necesarios para satisfacer los
-     * requerimientos.
-     */
-
-    public Computer(String serialNumber, boolean nextWindow, computer[] computers) {
+    private ArrayList<Incident> incidents;
+    
+    /**
+     * Descripcion: Constructor de Computer.
+     * @param serialNumber: El numero serial del computador
+     * @param nextWindow: Sirve para verificar
+     * @param incidents: Crea un ArrayList con los incidentes que han tenido los computadores. 
+    */
+    public Computer(String serialNumber, boolean nextWindow, ArrayList<Incident> incidents) {
         this.serialNumber = serialNumber;
         this.nextWindow = nextWindow;
-        this.computer = new computer[0];
+        this.incidents = incidents;
     }
 
     //Setters
@@ -27,10 +31,6 @@ public class Computer {
         this.nextWindow = nextWindow;
     }
     
-    public void setComputer(computer[] computers) {
-        this.computers = computers;
-    }
-
     //Getters
 
     public String getSerialNumber(String serialNumber) {
@@ -41,23 +41,19 @@ public class Computer {
         return nextWindow;
     }
 
-    public computer[] getcomputers() {
-        return computers;
+    public ArrayList<Incident> getIncidents() {
+        return incidents;
     }
 
-    /*
-     * ATENCION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     * El siguiente metodo esta incompleto.
-     * Agregue los parametros y retorno que sean pertinentes.
-     * Agregue la logica necesaria.
+    /**
+     * Descrpcion: Registra un incidente que haya tenido un computador.
+     * @param dateReport  Fecha de reporte del incidente.
+     * @param description Descripción del incidente.
+     * 
      */
     public void addIncident(LocalDate dateReport, String description, String serialNumber) {
-        for(int i = 0; i < computers.length; i++){
-            if( computers[i] == null) {
-                computers[i] = new computer(serialNumber, dateReport, description);
-                break;
-            }
-        }
+        Incident incid = new Incident(dateReport, description);
+        incidents.add(incid);
     }
 
 }
