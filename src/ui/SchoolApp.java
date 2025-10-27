@@ -1,17 +1,13 @@
 package ui;
 
 import java.util.Scanner;
+import java.time.LocalDate;
 import model.SchoolController;
 
 public class SchoolApp {
 
-    /*
-     * ATENCION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     * Agregue los atributos (relaciones) necesarios para conectar esta clase con el
-     * modelo.
-     */
-
     private Scanner input;
+    private SchoolController controller;
 
     public static void main(String[] args) {
 
@@ -23,14 +19,8 @@ public class SchoolApp {
     // Constructor
     public SchoolApp() {
         input = new Scanner(System.in);
+        controller = new SchoolController("Computaricemos");
     }
-
-    /*
-     * ATENCION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     * El siguiente metodo esta incompleto.
-     * Agregue la logica necesaria (instrucciones) para satisfacer los
-     * requerimientos
-     */
 
     public void menu() {
 
@@ -69,43 +59,49 @@ public class SchoolApp {
 
     }
 
-    /*
-     * ATENCION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     * Los siguientes metodos estan incompletos.
-     * Agregue la logica necesaria (instrucciones) para satisfacer los
-     * requerimientos
-     */
-
     public void registrarComputador() {
         System.out.println("Ingrese el número serial: ");
-        String serialNumber = Scanner.nextLine();
+        input.nextLine();
+        String serialNumber = input.nextLine();
 
-        System.out.println("¿Está junto a una ventana? (true/false): ");
-        boolean nextWindow = Scanner.nextBoolean();
-        Scanner.nextLine();
+        if (controller.existeSerial(serialNumber)) {
+            System.out.println("Ya existe un computador con el serial " + serialNumber + ". Por favor ingresa uno diferente.");
+            return;
+        }
 
-        System.out.println(SchoolController.agregarComputador(serialNumber, nextWindow));
+        System.out.println("¿Está junto a una ventana? (Si/ No): ");
+        String respuesta = input.nextLine().trim().toLowerCase();
+        boolean nextWindow = respuesta.equals("si");
+        
 
-        System.out.println("Todos los espacios han sido procesados.");
+        System.out.println(controller.agregarComputador(serialNumber, nextWindow));
     }
 
     public void registrarIncidenteEnComputador() {
-        System.out.print("Ingrese el piso: ");
-        int FLOORS = Scanner.nextInt();
+        System.out.print("Ingrese el piso donde se encuentra ubicado el computador de (0-4): ");
+        int f = input.nextInt();
         
-        System.out.print("Ingrese la columna: ");
-        int COL = Scanner.nextInt();
-        Scanner.nextLine(); 
+        System.out.print("Ingrese la columna donde se encuentra ubicado el computador de (0-9): ");
+        int c = input.nextInt();
+        input.nextLine(); 
+
+        if (controller.getMatrizComputers()[f][c] == null) {
+            System.out.println("No hay computador en esa posición.");
+            return;
+        }
         
         System.out.print("Descripción del incidente: ");
-        String description = Scanner.nextLine();
+        String description = input.nextLine();
+
+        System.out.println("Ingrese la fecha en la que se reporto el computador (año-mes-dia)");
+
+        LocalDate dateReport = LocalDate.parse(input.nextLine());
         
-        SchoolController.addIncidentToComputer(FLOORS, COL, description);
+        System.out.println(controller.agregarIncidenteEnComputador(f, c, dateReport, description));
     }
 
     public void consultarComputadorConMasIncidentes() {
-        System.out.println(SchoolController.getComputerList());
-        break;
+        System.out.println(controller.getComputerList());
     }
 
 }
