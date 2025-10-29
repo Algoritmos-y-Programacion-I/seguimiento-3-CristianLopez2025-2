@@ -176,7 +176,7 @@ public class SchoolController {
     }
 
     /**
-     * Descripción: Retorna el computador que tenga la mayor cantidad de incidentes registrados.
+     * Descripcion: Retorna el computador que tenga la mayor cantidad de incidentes registrados.
      * @return Mensaje con la información del computador con más incidentes.
      */
     public String getComputerList() {
@@ -199,7 +199,7 @@ public class SchoolController {
         } else {
             mensaje += "Computador con más incidentes: \n";
             mensaje += "Serial: " + maxComputer.getSerialNumber() + "\n";
-            mensaje += "Piso y columna del computador" + SearchPositionComputer(maxComputer) + "\n";
+            mensaje += "Piso y columna del computador:" + SearchPositionComputer(maxComputer) + "\n";
             mensaje += "Total de incidentes: " + maxIncidents;
         }
         return mensaje;
